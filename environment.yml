@@ -11,8 +11,6 @@ dependencies:
   - c-ares=1.19.1
   - ca-certificates=2024.3.11
   - certifi=2022.12.7
-  - cudatoolkit=10.1.243
-  - cudnn=7.6.5
   - cupti=10.1.168
   - fftw=3.3.9
   - flit-core=3.6.0
@@ -67,7 +65,6 @@ dependencies:
   - tensorflow=1.14.0
   - tensorflow-base=1.14.0
   - tensorflow-estimator=1.14.0
-  - tensorflow-gpu=1.14.0
   - termcolor=2.1.0
   - tk=8.6.12
   - typing_extensions=4.4.0

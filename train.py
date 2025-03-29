@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 import tensorflow as tf
 import argparse
+import os
 
 from model.unet import UNet
 
@@ -43,8 +44,29 @@ args = parser.parse_args()
 
 
 def main(_):
+    # Configure GPU memory usage
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
+    
+    # Enable auto mixed precision for TensorFlow 1.x
+    # This allows operations to use FP16 where possible, reducing memory usage
+    # os.environ['TF_ENABLE_AUTO_MIXED_PRECISION'] = '1'
+    # if hasattr(tf.GraphOptions, 'rewrite_options'):
+    #     config.graph_options.rewrite_options.auto_mixed_precision = 1
+
+    # # Enable XLA compilation
+    # config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
+    
+    # More aggressive memory settings
+    # This forces TensorFlow to immediately clean up unused memory
+    #config.gpu_options.force_gpu_compatible = True
+    
+    # Optional: limit memory if still having issues
+    # Adjust fraction if needed (0.9 = use 90% of available memory)
+    # config.gpu_options.per_process_gpu_memory_fraction = 0.9
+    print("Starting training with batch_size =", args.batch_size)
+    print("Resuming from checkpoint in:", os.path.join(args.experiment_dir, "checkpoint", 
+                                                     "experiment_{}_batch_{}".format(args.experiment_id, args.batch_size)))
 
     with tf.Session(config=config) as sess:
         model = UNet(args.experiment_dir, batch_size=args.batch_size, experiment_id=args.experiment_id,

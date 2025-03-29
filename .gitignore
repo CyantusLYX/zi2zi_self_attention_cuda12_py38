@@ -13,4 +13,12 @@ image*/*.jpg
 !image_data_dir/
 
 *.txt
-
+image_data_dir/*
+image_val/*
+!image_val/
+!image_train/
+font/112590023.ttf
+cjk_train.json
+cjk_val.json
+cjk.json
+font/112590023.ttf
