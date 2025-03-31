@@ -81,7 +81,14 @@ python m3_merge_json.py.py
 
 使用下面指令可以直接生成環境！！！！！
 ```
+#for前置
 conda env create -f environment.yml
+#for訓練（不確定能不能推理，再看看）
+conda env create -f nv-tf.yml
+#如果這步報錯可以把yml裡面裝不了的刪掉，進nv-tf跑下面兩行：
+pip install nvidia-pyindex
+pip install nvidia-tensorflow[horovod]
+
 git clone https://github.com/chiaoooo/zi2zi_tensorflow.git
 cd zi2zi_tensorlow
 ```
